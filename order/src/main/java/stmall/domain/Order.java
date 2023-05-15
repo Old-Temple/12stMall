@@ -14,7 +14,7 @@ import stmall.domain.OrderPlaced;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO) //getNextVal 시퀀스라고 생각
     private Long id;
 
     private String userId;

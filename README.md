@@ -14,7 +14,7 @@ docker-compose up
 cd kafka
 docker-compose exec -it kafka /bin/bash
 cd /bin
-./kafka-console-consumer --bootstrap-server localhost:9092 --topic
+./kafka-console-consumer --bootstrap-server localhost:9092 --topic stmall
 ```
 
 ## Run the backend micro-services

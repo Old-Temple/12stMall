@@ -17,9 +17,7 @@ public class MyPageViewHandler {
     private MyPageRepository myPageRepository;
 
     @StreamListener(KafkaProcessor.INPUT)
-    public void whenOrderPlaced_then_CREATE_1(
-        @Payload OrderPlaced orderPlaced
-    ) {
+    public void whenOrderPlaced_then_CREATE_1(@Payload OrderPlaced orderPlaced) {
         try {
             if (!orderPlaced.validate()) return;
 
@@ -39,16 +37,12 @@ public class MyPageViewHandler {
     }
 
     @StreamListener(KafkaProcessor.INPUT)
-    public void whenDeliveryCompleted_then_UPDATE_1(
-        @Payload DeliveryCompleted deliveryCompleted
-    ) {
+    public void whenDeliveryCompleted_then_UPDATE_1(@Payload DeliveryCompleted deliveryCompleted) {
         try {
             if (!deliveryCompleted.validate()) return;
             // view 객체 조회
 
-            List<MyPage> myPageList = myPageRepository.findByOrderId(
-                deliveryCompleted.getOrderId()
-            );
+            List<MyPage> myPageList = myPageRepository.findByOrderId(deliveryCompleted.getOrderId());
             for (MyPage myPage : myPageList) {
                 // view 객체에 이벤트의 eventDirectValue 를 set 함
                 myPage.setStatus(deliveryCompleted.getStatus());
@@ -62,16 +56,12 @@ public class MyPageViewHandler {
     }
 
     @StreamListener(KafkaProcessor.INPUT)
-    public void whenDeliveryReturned_then_UPDATE_2(
-        @Payload DeliveryReturned deliveryReturned
-    ) {
+    public void whenDeliveryReturned_then_UPDATE_2(@Payload DeliveryReturned deliveryReturned) {
         try {
             if (!deliveryReturned.validate()) return;
             // view 객체 조회
 
-            List<MyPage> myPageList = myPageRepository.findByOrderId(
-                deliveryReturned.getOrderId()
-            );
+            List<MyPage> myPageList = myPageRepository.findByOrderId(deliveryReturned.getOrderId());
             for (MyPage myPage : myPageList) {
                 // view 객체에 이벤트의 eventDirectValue 를 set 함
                 myPage.setStatus(deliveryReturned.getStatus());
